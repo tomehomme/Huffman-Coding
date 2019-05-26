@@ -1,23 +1,21 @@
 #include "HuffmanCode.h"
+#include "Heap.h"
+#include "HashTable.h"
 #include <list>
 #include <fstream>
 #include <iostream>
 #include <list>
-#include "heap.h"
+
 
 using namespace std;
+
+
 
 HuffmanCode::HuffmanCode(){
     hash = new HashTable(MAX_SIZE);
     ReadFile();
+    hash->heapify(Priority);
 }
-
-
-int HuffmanCode::computeHash(char c){
-    int bucket = c;
-    return bucket%MAX_SIZE;
-}
-
 
 void HuffmanCode::ReadFile(){
     cout << "Enter the file name you would like to encode: " << endl;
@@ -38,12 +36,4 @@ void HuffmanCode::ReadFile(){
     }
 }
 
-void HuffmanCode::heapify(){
-    int i = 1; //using le pendu's heap method, start at 1
-    for (list<CharEntry>::iterator it = hash->begin(); it!= hash->end(); it++){
-        CharEntry* entry = it;
-        Priority.enqueue(entry);
-    }
-
-}
 

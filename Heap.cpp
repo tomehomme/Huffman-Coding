@@ -1,4 +1,7 @@
 #include "Heap.h"
+#include "HuffmanCode.h"
+#include "HashTable.h"
+
 #include <iostream>
 using namespace std;
 
@@ -11,7 +14,7 @@ void Heap::enqueue (CharEntry* job){ //inserts to the back and then bubbles up
     if (numItems != MAX_HEAP_SIZE){
         arr[numItems+1] = job;
         numItems++;
-        bubbleUp(numItems); //index of the new job is numItems-1
+        bubbleUp(numItems); //index of the new job is numItems
     }
 }
 
@@ -31,21 +34,18 @@ void Heap::bubbleUp(int currIndex){
     bubbleUp(currIndex/2); //recursively bubble up with parent's index
 }
 
-void Heap::print() {
+void Heap::print() { //prints the heap
     if (!isEmpty()){
         for (int i = 1; i<numItems+1; i++){
          cout << "Priority: " << arr[i]->numAppearances << endl;
         }
-        //  << ", Job Number: " << arr[0]->getJobNumber()
-        //  << ", Number of Pages: " << arr[0]->getPages()
-        //  << endl;
     }
    
 }
 
  void Heap::dequeue ( ){
      if (!isEmpty()){
-         swap(arr[1],arr[numItems]);
+         swap(arr[1],arr[numItems+1]);
          numItems--;
          trickleDown(1); //trickle down starting at root 
      }
@@ -69,10 +69,3 @@ void Heap::print() {
  }
 
 
-void Heap::heapify(const HashTable* hash){
-    int bucket = 0;
-    for (int i = 0; i < hash->getSize(); i++){
-        for (list<CharEntry>::iterator it = hash[i].begin(); )
-
-    }
-}

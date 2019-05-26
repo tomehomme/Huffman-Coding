@@ -11,14 +11,14 @@ using namespace std;
 const int MAX_SIZE = 200;
 
 
-struct CharEntry{
-    char chara;
-    int numAppearances;
-    CharEntry(): chara(' '), numAppearances(0){};
-    CharEntry(const char& a): chara(a), numAppearances(0) {};
-    void incApp(){numAppearances++;}
-    char getCharacter(){return chara;}
-};
+// struct CharEntry{
+//     char chara;
+//     int numAppearances;
+//     CharEntry(): chara(' '), numAppearances(0){};
+//     CharEntry(const char& a): chara(a), numAppearances(0) {};
+//     void incApp(){numAppearances++;}
+//     char getCharacter(){return chara;}
+// };
 
 
 class HuffmanCode{
@@ -28,7 +28,6 @@ class HuffmanCode{
         void ReadFile(); //reads the file and puts every char in its own bucket
         void heapify(); //heapifies the hash
         void Encode();
-        int computeHash(char c);
     public:
         HuffmanCode();
         ofstream outputEncoding (const string& ); //outputs the encoded file

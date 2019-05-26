@@ -1,11 +1,23 @@
 #ifndef __HEAP_H
 #define __HEAP_H
+
 #include "HuffmanCode.h"
+#include "HashTable.h"
+
 #include <list>
 #include <fstream>
 #include <iostream>
 
 const int MAX_HEAP_SIZE = 60;
+
+struct CharEntry{
+    char chara;
+    int numAppearances;
+    CharEntry(): chara(' '), numAppearances(0){};
+    CharEntry(const char& a): chara(a), numAppearances(0) {};
+    void incApp(){numAppearances++;}
+    char getCharacter(){return chara;}
+};
 
 class Heap {
 private:
@@ -42,6 +54,8 @@ private:
 
   //You can include additional private helper functions here
   void bubbleUp(int); //called by enqueue to bring the new job to the right position
+
+  
   
     
 

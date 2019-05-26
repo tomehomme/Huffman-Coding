@@ -5,6 +5,7 @@
 #include <list>
 #include <iostream>
 #include "HuffmanCode.h"
+#include "Heap.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ class HashTable {
 	// double getAverage(const char &);
 	void put(const char &);
     int getSize()const;
+	void  heapify(Heap&);
  
  private:
 	int computeHash(const char &);

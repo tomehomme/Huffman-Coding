@@ -1,6 +1,9 @@
-//collaborated with Ajeet Kokatay and Ruth Navaratte
 #include "HashTable.h"
 #include "HuffmanCode.h"
+#include "Heap.h"
+
+#include <iostream>
+using namespace std;
 
 /* HashTable constructor
 *  input s is the size of the array
@@ -20,7 +23,7 @@ HashTable::HashTable (int s) {
 *  ensure array index doesn't go out of bounds
 */
 int HashTable::computeHash(const char &s) {
-    return (s*19)%size;
+    return (s)%size;
 }
 
 
@@ -89,4 +92,15 @@ bool HashTable::contains(const char &s) {
 
 int HashTable::getSize()const{
     return size;
+}
+
+
+void HashTable::heapify(Heap& heap){
+    // int index = 1;
+    for (int i = 0; i < size; i++){
+        for (list<CharEntry>::iterator it = hashTable[i].begin(); it !=hashTable[i].end(); it++){
+            CharEntry entry = *it;
+            heap.enqueue(&entry);
+        }
+    }
 }

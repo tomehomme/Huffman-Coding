@@ -1,7 +1,10 @@
 //used https://kamilmysliwiec.com/implementation-of-huffman-coding-algorithm-with-binary-trees/
 //used https://www.techiedelight.com/huffman-coding/
 #include <iostream>
+#include <exception>
 #include <string>
+#include <bits/stdc++.h> 
+#include <sstream>
 #include <queue>
 #include <fstream>
 #include <unordered_map>
@@ -165,6 +168,18 @@ void buildHuffmanTree(string inputFile, const string& fileName)
 	cout << "finished." << endl;
 }
 
+void binaryFile (const string& inputfile, const string& outfile){
+	ifstream inputs(inputfile);
+	string str;
+	ofstream outputs(outfile);
+	while (inputs>>str){
+		for (size_t i = 0; i < str.size(); ++i){
+			outputs << bitset<8>(str.c_str()[i]) << endl;
+		}
+	}
+	inputs.close();
+}
+
 
 streamsize get_file_size(const string& filename){
     ifstream file(filename, ios::binary | ios::ate); //ios::ate initial position is at end of file
@@ -179,16 +194,26 @@ int main()
 	string input = "C:\\Users\\hommp\\OneDrive\\Desktop\\CS14\\challenges\\c4a\\moby_dick.txt";
 
 	cout << "Compressing the following file: " << input<<endl;
-    string output = "moby_dick_compressed.txt";
+    string output = "moby_dick_compressed.bin";
 	cout << "The compressed file is named: " << output << endl;
 
    
 	buildHuffmanTree(input, output);
-
+	ifstream file(input);
+		stringstream stream;
+		stream << file.rdbuf();
+		file.close();
+		string binaryfile = "binaryTxt.bin";
+		binaryFile (input, binaryfile);
+		const auto file_content = stream.str();
+		const auto file_size = get_file_size(binaryfile);
+		const auto after_file_size = get_file_size(output);
+		cout << "Before compression: " << file_size << " bytes" << endl;
 	//need to calculate the bits ratio
-	cout << "Before compression: " << totalchar*8 << endl;// get_file_size(input) << endl;
-	cout << "After compression: " << get_file_size(output) << endl;
-	cout << "Ratio of compression (Before:After): " << static_cast<double>(totalchar*8)/get_file_size(output)*100 << "%" << endl;
+	// cout << "Before compression: " << totalchar*8 << endl;// get_file_size(input) << endl;
+	cout << "After compression: " << after_file_size << " bytes" << endl;
+	cout << "Change of size: " << after_file_size - file_size << " bytes" << endl;
+	cout << "Ratio of compression (Before:After): " << static_cast<double>(file_size)/after_file_size*100 << "% compression" << endl;
 	
 
 	return 0;

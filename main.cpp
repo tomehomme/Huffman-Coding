@@ -168,17 +168,17 @@ void buildHuffmanTree(string inputFile, const string& fileName)
 	cout << "finished." << endl;
 }
 
-void binaryFile (const string& inputfile, const string& outfile){
-	ifstream inputs(inputfile);
-	string str;
-	ofstream outputs(outfile);
-	while (inputs>>str){
-		for (size_t i = 0; i < str.size(); ++i){
-			outputs << bitset<8>(str.c_str()[i]) << endl;
-		}
-	}
-	inputs.close();
-}
+// void binaryFile (const string& inputfile, const string& outfile){
+// 	ifstream inputs(inputfile);
+// 	string str;
+// 	ofstream outputs(outfile);
+// 	while (inputs>>str){
+// 		for (size_t i = 0; i < str.size(); ++i){
+// 			outputs << bitset<8>(str.c_str()[i]) << endl;
+// 		}
+// 	}
+// 	inputs.close();
+// }
 
 
 streamsize get_file_size(const string& filename){
@@ -191,10 +191,10 @@ int main()
 {
 	cout << "Huffman coding is a data compression algorithm." << endl;
 	//change to the filepath you want to compress..
-	string input = "C:\\Users\\hommp\\OneDrive\\Desktop\\CS14\\challenges\\c4a\\moby_dick.txt";
+	string input = "C:\\Users\\hommp\\OneDrive\\Desktop\\CS14\\challenges\\c4a\\testThis.txt";
 
 	cout << "Compressing the following file: " << input<<endl;
-    string output = "moby_dick_compressed.bin";
+    string output = "test_compressed.bin";
 	cout << "The compressed file is named: " << output << endl;
 
    
@@ -203,17 +203,17 @@ int main()
 		stringstream stream;
 		stream << file.rdbuf();
 		file.close();
-		string binaryfile = "binaryTxt.bin";
-		binaryFile (input, binaryfile);
+		// string binaryfile = "binaryTxt.bin";
+		// binaryFile (input, binaryfile);
 		const auto file_content = stream.str();
-		const auto file_size = get_file_size(binaryfile);
+		const auto file_size = totalchar*8;
 		const auto after_file_size = get_file_size(output);
-		cout << "Before compression: " << file_size << " bytes" << endl;
+		cout << "Before compression: " << file_size << " bits" << endl;
 	//need to calculate the bits ratio
 	// cout << "Before compression: " << totalchar*8 << endl;// get_file_size(input) << endl;
-	cout << "After compression: " << after_file_size << " bytes" << endl;
-	cout << "Change of size: " << after_file_size - file_size << " bytes" << endl;
-	cout << "Ratio of compression (Before:After): " << static_cast<double>(file_size)/after_file_size*100 << "% compression" << endl;
+	cout << "After compression: " << after_file_size << " bits" << endl;
+	cout << "Change of size: " << after_file_size - file_size << " bits" << endl;
+	cout << "Ratio of compression (Before:After): " << static_cast<double>(after_file_size)/file_size*100 << "% compression" << endl;
 	
 
 	return 0;

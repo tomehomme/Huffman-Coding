@@ -1,4 +1,3 @@
-//used https://kamilmysliwiec.com/implementation-of-huffman-coding-algorithm-with-binary-trees/
 //used https://www.techiedelight.com/huffman-coding/
 #include <iostream>
 #include <exception>
@@ -148,7 +147,7 @@ void buildHuffmanTree(string inputFile, const string& fileName)
 		oFile << huffmanCode[ch];
 	}
 	iFile.close();
-		
+	
 	// traverse the Huffman Tree again and this time
 	// decode the encoded string
 	// int index = -1;
@@ -168,17 +167,18 @@ void buildHuffmanTree(string inputFile, const string& fileName)
 	cout << "finished." << endl;
 }
 
-// void binaryFile (const string& inputfile, const string& outfile){
-// 	ifstream inputs(inputfile);
-// 	string str;
-// 	ofstream outputs(outfile);
-// 	while (inputs>>str){
-// 		for (size_t i = 0; i < str.size(); ++i){
-// 			outputs << bitset<8>(str.c_str()[i]) << endl;
-// 		}
-// 	}
-// 	inputs.close();
-// }
+
+void binaryFile (const string& inputfile, const string& outfile){
+	ifstream inputs(inputfile);
+	string str;
+	ofstream outputs(outfile);
+	while (inputs>>str){
+		for (size_t i = 0; i < str.size(); ++i){
+			outputs << bitset<8>(str.c_str()[i]) << endl;
+		}
+	}
+	inputs.close();
+}
 
 
 streamsize get_file_size(const string& filename){
@@ -186,15 +186,14 @@ streamsize get_file_size(const string& filename){
     return file.tellg(); //returns position of current character in input stream
 }
 
-// Huffman coding algorithm
-int main()
-{
-	cout << "Huffman coding is a data compression algorithm." << endl;
-	//change to the filepath you want to compress..
-	string input = "C:\\Users\\hommp\\OneDrive\\Desktop\\CS14\\challenges\\c4a\\testThis.txt";
 
+int main()
+	cout << "Huffman coding is a data compression algorithm." << endl;
+    string input = "";
+    cout << "Enter the file name you want to compress" << endl;
+    cin >> input;
 	cout << "Compressing the following file: " << input<<endl;
-    string output = "test_compressed.bin";
+    string output = "compressed_file.bin";
 	cout << "The compressed file is named: " << output << endl;
 
    

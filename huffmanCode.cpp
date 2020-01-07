@@ -43,8 +43,7 @@ struct comp
 
 // traverse the Huffman Tree and store Huffman Codes
 // in a map.
-void encode(Node* root, string str,
-			unordered_map<char, string> &huffmanCode)
+void encode(Node* root, string str, unordered_map<char, string> &huffmanCode)
 {
 	if (root == nullptr)
 		return;
@@ -114,8 +113,7 @@ void buildHuffmanTree(string inputFile, const string& fileName)
 	// do till there is more than one node in the queue
 	while (pq.size() != 1)
 	{
-		// Remove the two nodes of highest priority
-		// (lowest frequency) from the queue
+		// Remove the two nodes of highest priority (lowest frequency) from the queue
 		Node *left = pq.top(); pq.pop();
 		Node *right = pq.top();	pq.pop();
 
@@ -147,26 +145,7 @@ void buildHuffmanTree(string inputFile, const string& fileName)
 		oFile << huffmanCode[ch];
 	}
 	iFile.close();
-	
-	// traverse the Huffman Tree again and this time
-	// decode the encoded string
-	// int index = -1;
-
-	// string fileName2;
-	// cout << "FOR TESTING PURPOSEES: What would you like the decoded file to be named?: " << endl;
-	// ifstream encodedFile(fileName);
-	// string str;
-	// encodedFile >> str;
-	// encodedFile.close();
-	// cin >> fileName2;
-	// ofstream decodeFile(fileName2);
-	// while (index < (int)str.size() - 2) {
-	// 	decode(root, index, str, decodeFile);
-	// }
-	// decodeFile.close();
-	cout << "finished." << endl;
 }
-
 
 void binaryFile (const string& inputfile, const string& outfile){
 	ifstream inputs(inputfile);
@@ -179,41 +158,32 @@ void binaryFile (const string& inputfile, const string& outfile){
 	}
 	inputs.close();
 }
-
-
-streamsize get_file_size(const string& filename){
-    ifstream file(filename, ios::binary | ios::ate); //ios::ate initial position is at end of file
-    return file.tellg(); //returns position of current character in input stream
+	streamsize get_file_size(const string& filename){
+	ifstream file(filename, ios::binary | ios::ate); //ios::ate initial position is at end of file
+	return file.tellg(); //returns position of current character in input stream
 }
-
 
 int main()
 	cout << "Huffman coding is a data compression algorithm." << endl;
-    string input = "";
-    cout << "Enter the file name you want to compress" << endl;
-    cin >> input;
+  	string input = "";
+   	cout << "Enter the file name you want to compress" << endl;
+    	cin >> input;
 	cout << "Compressing the following file: " << input<<endl;
-    string output = "compressed_file.bin";
+    	string output = "compressed_file.bin";
 	cout << "The compressed file is named: " << output << endl;
-
    
 	buildHuffmanTree(input, output);
 	ifstream file(input);
-		stringstream stream;
-		stream << file.rdbuf();
-		file.close();
-		// string binaryfile = "binaryTxt.bin";
-		// binaryFile (input, binaryfile);
-		const auto file_content = stream.str();
-		const auto file_size = totalchar*8;
-		const auto after_file_size = get_file_size(output);
-		cout << "Before compression: " << file_size << " bits" << endl;
-	//need to calculate the bits ratio
-	// cout << "Before compression: " << totalchar*8 << endl;// get_file_size(input) << endl;
+	stringstream stream;
+	stream << file.rdbuf();
+	file.close();
+	const auto file_content = stream.str();
+	const auto file_size = totalchar*8;
+	const auto after_file_size = get_file_size(output);
+	cout << "Before compression: " << file_size << " bits" << endl;
 	cout << "After compression: " << after_file_size << " bits" << endl;
 	cout << "Change of size: " << after_file_size - file_size << " bits" << endl;
 	cout << "Ratio of compression (Before:After): " << static_cast<double>(after_file_size)/file_size*100 << "% compression" << endl;
 	
-
 	return 0;
 }
